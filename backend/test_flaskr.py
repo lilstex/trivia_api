@@ -14,7 +14,7 @@ class TriviaTestCase(unittest.TestCase):
         """Define test variables and initialize app."""
         self.app = create_app()
         self.client = self.app.test_client
-        self.database_path = "postgresql://postgres:postgres@localhost:5432/trivia_test"
+        self.database_path = os.environ.get('TEST_DATABASE')
         setup_db(self.app, self.database_path)
 
         # binds the app to the current context
@@ -50,7 +50,7 @@ class TriviaTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
 
-    def test_create_categories(self):
+    def test_create_categories_422_already_exists(self):
         new_category = {
             "category": "Sports"
             }
@@ -78,19 +78,19 @@ class TriviaTestCase(unittest.TestCase):
 
 
     def test_delete_question(self):
-        res = self.client().delete("/questions/20")
+        res = self.client().delete("/questions/22")
         data = json.loads(res.data)
-        question = Question.query.filter(Question.id == 20).one_or_none()
+        question = Question.query.filter(Question.id == 22).one_or_none()
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data["success"], True)
-        self.assertEqual(data["deleted"], 20)
+        self.assertEqual(data["deleted"], 22)
         self.assertEqual(question, None)
 
 
     def test_create_question(self):
         new_question = {
-            "question": "Who won the 2008 ballon d'or?",
-            "answer": "Cristiano Ronaldo",
+            "question": "Who won the 2009 ballon d'or?",
+            "answer": "Lionel Messi",
             "category": 6,
             "difficulty": 3,
             "rating": 4

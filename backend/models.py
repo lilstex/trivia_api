@@ -4,8 +4,10 @@ from sqlalchemy.orm import declarative_base, relationship
 from flask_sqlalchemy import SQLAlchemy
 import json
 from flask_migrate import Migrate
+from dotenv import load_dotenv
+load_dotenv()
 
-database_path = "postgresql://postgres:postgres@localhost:5432/trivia"
+database_path = os.environ.get('DATABASE_URI')
 
 db = SQLAlchemy()
 
