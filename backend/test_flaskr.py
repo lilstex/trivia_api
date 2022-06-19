@@ -61,12 +61,12 @@ class TriviaTestCase(unittest.TestCase):
 
 
     def test_delete_category(self):
-        res = self.client().delete("/categories/10")
+        res = self.client().delete("/categories/5")
         data = json.loads(res.data)
-        category = Category.query.filter(Category.id == 10).one_or_none()
+        category = Category.query.filter(Category.id == 5).one_or_none()
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data["success"], True)
-        self.assertEqual(data["deleted"], 10)
+        self.assertEqual(data["deleted"], 5)
         self.assertEqual(category, None)
 
     def test_get_questions(self):
@@ -78,12 +78,12 @@ class TriviaTestCase(unittest.TestCase):
 
 
     def test_delete_question(self):
-        res = self.client().delete("/questions/22")
+        res = self.client().delete("/questions/12")
         data = json.loads(res.data)
-        question = Question.query.filter(Question.id == 22).one_or_none()
+        question = Question.query.filter(Question.id == 12).one_or_none()
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data["success"], True)
-        self.assertEqual(data["deleted"], 22)
+        self.assertEqual(data["deleted"], 12)
         self.assertEqual(question, None)
 
 
