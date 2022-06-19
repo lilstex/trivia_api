@@ -17,23 +17,42 @@ This application performs the following actions:
 
 ## Getting Started
 
+#### Backend
+
 ### Pre-requisites and Local Development 
 Developers using this project should already have Python3, pip and node installed on their local machines.
 
 #### Virtual Enviornment
 
 We recommend working within a virtual environment whenever using Python for projects. This keeps your dependencies for each project separate and organaized. Instructions for setting up a virual enviornment for your platform can be found in the [python docs](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
+You can download and install the virtual environment above using `pip` as:
+```
+pip install virtualenv
+```
+**Initialize and activate a virtualenv using:**
+```
+python -m virtualenv env
+source env/bin/activate
+```
+**Note** - In Windows, the `env` does not have a `bin` directory. Therefore, you'd use the analogous command shown below:
+```
+source env/Scripts/activate
+```
 
-#### Backend
-
-From the backend folder run `pip install requirements.txt`. All required packages are included in the requirements file. 
-
+**Install the dependencies:**
+From the backend folder run `pip install requirements.txt`. All required packages are included in the requirements file.
+```
+pip install -r requirements.txt
+```
+**Run the development server:** 
 To run the application run the following commands: 
 ```
 export FLASK_APP=flaskr
 export FLASK_ENV=development
 flask run
 ```
+
+**Note** - Create a `.env` file following the example in `.env.example` file, and pass in your DATABASE URI both the test database uri for running test, when connecting database to the app.
 
 These commands put the application in development and directs our application to use the `__init__.py` file in our flaskr folder. Working in development mode shows an interactive debugger in the console and restarts the server whenever changes are made. If running locally on Windows, look for the commands in the [Flask documentation](http://flask.pocoo.org/docs/1.0/tutorial/factory/).
 
